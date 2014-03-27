@@ -1,0 +1,11 @@
+#!/bin/bash
+URL='http://192.168.1.1/cgi-bin/luci/rpc/auth'
+DATA='
+{
+    "jsonrpc": "2.0",
+    "method": "login",
+    "params": ["root", "asdf1234"],
+    "id": 1
+}'
+curl -s -i -X POST -d "$DATA" $URL 1>.tmp_login_response
+echo $(grep sysauth .tmp_login_response | sed 's/.*auth=\([a-zA-Z0-9]*\);.*/\1/')

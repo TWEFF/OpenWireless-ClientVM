@@ -1,0 +1,11 @@
+Example scripts to show connectivity with router's RPC.
+
+To run:
+
+  $ ./run
+
+Explanations:
+
+  bwc: LUCI Bandwidth Collector
+  auth: Authorizes against the router to get an auth token
+  run: Executes bwc with an auth token

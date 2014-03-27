@@ -24,7 +24,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
   # config.vm.network "private_network", ip: "192.168.33.10"
-  config.vm.network "private_network", ip: "192.168.1.3", virtualbox__intnet: "OpenWRT-lan" 
+  config.vm.network "private_network", ip: "192.168.1.3", virtualbox__intnet: "OpenWRT-lan"
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -93,6 +93,22 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #   # You may also specify custom JSON attributes:
   #   chef.json = { :mysql_password => "foo" }
   # end
+
+  config.vm.provision :shell do |s|
+    s.inline = [
+        "sudo apt-get update",
+        "sudo apt-get -y install ruby2.0 ruby2.0-dev build-essential libssl-dev zlib1g-dev ruby-switch",
+        "sudo ruby-switch --set ruby2.0",
+        "gem install chef",
+    ].join " && "
+  end
+
+  config.vm.provision "chef_solo" do |chef|
+    chef.cookbooks_path = "chef/cookbooks"
+    chef.roles_path = "chef/roles"
+    chef.data_bags_path = "chef/data_bags"
+    chef.add_role "openwrt_client"
+  end
 
   # Enable provisioning with chef server, specifying the chef server URL,
   # and the path to the validation key (relative to this Vagrantfile).

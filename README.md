@@ -7,3 +7,7 @@ Requirements
 ------------
 
 * Vagrant 1.5+
+
+
+#### Login credential 
+username/password: vagrant

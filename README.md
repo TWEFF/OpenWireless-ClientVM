@@ -26,6 +26,7 @@ Virtual Machine Contents
 * Port forwarding on localhost port 2222
 * Vim
 * Curl
+* RVM and Ruby 2.1.2
 * SSH
 * xfce4
 * Google Chrome

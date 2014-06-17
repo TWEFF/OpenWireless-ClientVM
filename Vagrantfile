@@ -99,8 +99,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :shell do |s|
     s.inline = [
         "sudo apt-get update",
-        "sudo apt-get -y install ruby2.0 ruby2.0-dev build-essential libssl-dev zlib1g-dev ruby-switch",
-        "sudo ruby-switch --set ruby2.0",
+        "sudo apt-get install curl libcurl3",
+        '\curl -sSL https://get.rvm.io | bash -s stable --ruby=2.1.2',
+        "source /usr/local/rvm/scripts/rvm",
         "gem install chef"
     ].join " && "
   end

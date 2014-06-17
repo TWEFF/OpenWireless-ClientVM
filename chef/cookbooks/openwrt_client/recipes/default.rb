@@ -1,4 +1,4 @@
-%w{vim curl sshpass xfce4}.each do |name|
+%w{vim sshpass xfce4}.each do |name|
   package name do
     action :install
   end
